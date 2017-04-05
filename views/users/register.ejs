@@ -1,0 +1,25 @@
+<%- include('../partials/head.ejs') %>
+
+  <h1>Register</h1>
+
+  <p><%= message %></p>
+
+  <form method="post">
+    <fieldset>
+      <label for="req_username">Username</label>
+      <input type="text" name="username" id="req_username" placeholder="Kies een username" required />
+
+      <label for="req_mail">E-mailadres</label>
+      <input type="email" name="mail" id="req_mail" placeholder="Voer je e-mailadres in" required />
+
+      <label for="req_hometown">Woonplaats</label>
+      <input type="text" name="hometown" id="req_hometown" placeholder="Voer je woonplaats in" required />
+
+      <label for="req_password">Wachtwoord</label>
+      <input type="password" name="password" id="req_password" placeholder="Voer een wachtwoord in" required />
+
+      <input type="submit" value="Registreer"/>
+    </fieldset>
+  </form>
+
+<%- include('../partials/head.ejs') %>
