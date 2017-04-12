@@ -6,8 +6,13 @@ const request = require('request');
 const session = require('express-session');
 const compression = require('compression');
 const bodyParser = require('body-parser');
-const app = express();
 
+/* DEPENDENCIES CONFIGURATION
+----------------------------------------- */
+const app = express();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+app.io = io;
 
 /* MONGODB CONFIGURATION
 ----------------------------------------- */
@@ -41,8 +46,8 @@ app.use(compression());
 /* LOAD ALL ROUTERS
 ----------------------------------------- */
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
-const accountRouter = require('./routes/account');
+const usersRouter = require('./routes/account');
+const dashboardRouter = require('./routes/dashboard');
 
 /* MIDDLEWARE FOR THE VIEW ENGINE
 ----------------------------------------- */
@@ -58,8 +63,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 ----------------------------------------- */
 app.use(express.static('public')); // For server static files
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/account', accountRouter);
+app.use('/account', usersRouter);
+app.use('/dashboard', dashboardRouter);
 
 /* 404 PAGE
 ----------------------------------------- */
@@ -70,6 +75,6 @@ app.use(function(req, res, next) {
 
 /* START THE NPM SERVER
 ----------------------------------------- */
-app.listen(port, host, function() {
+http.listen(port, host, function() {
     console.log(`Server started`);
 });

@@ -1,0 +1,13 @@
+<%- include('../partials/head.ejs') %>
+
+  <h1>Hi <%= data.username %></h1>
+  <p>Welkom op de chat</p>
+
+  <ul id="chatMessages"></ul>
+  <form id="chatForm" action="">
+    <input id="m" autocomplete="off" />
+    <button>Verstuur</button>
+
+  <a href="/dashboard">Terug naar dashboard</a>
+
+<%- include('../partials/foot.ejs') %>

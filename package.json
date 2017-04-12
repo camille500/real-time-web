@@ -24,10 +24,12 @@
     "ejs": "^2.5.6",
     "express": "^4.15.2",
     "express-session": "^1.15.2",
+    "http": "0.0.0",
     "mongodb": "^2.2.25",
     "password-hash": "^1.2.2",
     "path": "^0.12.7",
-    "request": "^2.81.0"
+    "request": "^2.81.0",
+    "socket.io": "^1.7.3"
   },
   "devDependencies": {
     "nodemon": "^1.11.0"
