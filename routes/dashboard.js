@@ -10,8 +10,8 @@ module.exports = function(io) {
 
   io.on("connection", function(socket) {
     console.log('connection made');
-    socket.on('chat message', function(msg, user){
-      io.emit('chat message', msg, user);
+    socket.on('chat message', function(msg, user, us){
+      io.emit('chat message', msg, user, us);
     });
   });
 

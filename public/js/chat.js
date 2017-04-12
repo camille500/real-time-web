@@ -15,8 +15,10 @@
     return false;
   };
 
-  socket.on('chat message', function(message, username) {
-    playSound();
+  socket.on('chat message', function(message, user) {
+    if (user != username) {
+      playSound();
+    }
     var userSpan = document.createElement('span');
     var chatItem = document.createElement("li");
     userSpan.appendChild(document.createTextNode('[' + username + '] '));
