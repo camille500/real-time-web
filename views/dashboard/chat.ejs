@@ -1,15 +1,16 @@
 <%- include('../partials/head.ejs') %>
 
-  <h1>Hi <%= data.username %></h1>
+  <h1>Hi <span id="usName"><%= data.username %></span></h1>
   <p>Welkom op de chat</p>
 
   <ul id="chatMessages"></ul>
+  
   <form id="chatForm">
     <input id="message" autocomplete="off" />
     <button>Verstuur</button>
   </form>
 
-  <a href="/dashboard">Terug naar dashboard</a>
+  <a href="/account/logout">Uitloggen</a>
 
   <script src="/socket.io/socket.io.js"></script>
   <script type="text/javascript" src="/js/chat.js"></script>

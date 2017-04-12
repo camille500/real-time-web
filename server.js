@@ -12,7 +12,6 @@ const bodyParser = require('body-parser');
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
-app.io = io;
 
 /* MONGODB CONFIGURATION
 ----------------------------------------- */
@@ -47,7 +46,7 @@ app.use(compression());
 ----------------------------------------- */
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/account');
-const dashboardRouter = require('./routes/dashboard');
+const dashboardRouter = require('./routes/dashboard')(io);
 
 /* MIDDLEWARE FOR THE VIEW ENGINE
 ----------------------------------------- */
@@ -58,6 +57,7 @@ app.set('view engine', 'ejs');
 ----------------------------------------- */
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+
 
 /* INITIALIZE ROUTES
 ----------------------------------------- */
