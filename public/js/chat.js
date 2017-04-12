@@ -16,6 +16,7 @@
   };
 
   socket.on('chat message', function(message, username) {
+    playSound();
     var userSpan = document.createElement('span');
     var chatItem = document.createElement("li");
     userSpan.appendChild(document.createTextNode('[' + username + '] '));
@@ -23,5 +24,10 @@
     chatItem.appendChild(document.createTextNode(message));
     chatList.appendChild(chatItem);
   });
+
+  function playSound() {
+    var player = document.getElementById("sound");
+    sound.play();
+  }
 
 }());
