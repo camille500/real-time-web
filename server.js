@@ -71,5 +71,5 @@ app.use(function(req, res, next) {
 /* START THE NPM SERVER
 ----------------------------------------- */
 app.listen(port, host, function() {
-    console.log(`Server started on port ${port}`);
+    console.log(`Server started`);
 });
