@@ -16,12 +16,15 @@
   };
 
   socket.on('chat message', function(message, user) {
-    if (user != username) {
-      playSound();
-    }
     var userSpan = document.createElement('span');
     var chatItem = document.createElement("li");
-    userSpan.appendChild(document.createTextNode('[' + username + '] '));
+    var timestamp = new Date().getHours() + ':' + new Date().getMinutes();
+    if (user != username) {
+      playSound();
+    } else {
+      chatItem.setAttribute('class', 'your');
+    }
+    userSpan.appendChild(document.createTextNode('[' + user + '] ' + timestamp));
     chatItem.appendChild(userSpan);
     chatItem.appendChild(document.createTextNode(message));
     chatList.appendChild(chatItem);
