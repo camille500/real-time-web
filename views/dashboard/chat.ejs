@@ -4,10 +4,14 @@
   <p>Welkom op de chat</p>
 
   <ul id="chatMessages"></ul>
-  <form id="chatForm" action="">
-    <input id="m" autocomplete="off" />
+  <form id="chatForm">
+    <input id="message" autocomplete="off" />
     <button>Verstuur</button>
+  </form>
 
   <a href="/dashboard">Terug naar dashboard</a>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script type="text/javascript" src="/js/chat.js"></script>
 
 <%- include('../partials/foot.ejs') %>

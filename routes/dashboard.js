@@ -12,9 +12,14 @@ router.get('/', checkForSession, function(req, res) {
 });
 
 router.get('/chat', checkForSession, function(req, res) {
-    req.app.io.on('connection', function(socket){
-        socket.on('chat message', function(message) {
-        console.log('message: ' + message);
+      req.app.io.on('connection', function(socket){
+         socket.broadcast.emit('user connected');
+        console.log('a user connected');
+      socket.on('disconnect', function(){
+        console.log('user disconnected');
+      });
+      socket.on('chat message', function(message){
+          req.app.io.emit('chat message', message);
       });
     });
     res.locals.data = req.session.data;
