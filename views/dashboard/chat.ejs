@@ -3,7 +3,18 @@
   <h1>Hi <span id="usName"><%= data.username %></span></h1>
   <p>Welkom op de chat</p>
 
-  <ul id="chatMessages"></ul>
+  <ul id="chatMessages">
+    <% chat.forEach(function(item) { %>
+      <% if(item.username === data.username) { %>
+        <li class="your"><span><%= item.username %></span> <%= item.message %></li>
+      <% } else { %>
+        <li><span><%= item.username %></span> <%= item.message %></li>
+      <% } %>
+    <% }); %>
+  </ul>
+
+
+  <%= chat[0].username %>
 
   <form id="chatForm">
     <input id="message" autocomplete="off" />

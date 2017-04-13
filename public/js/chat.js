@@ -10,7 +10,7 @@
 
   form.onsubmit = function(e) {
     e.preventDefault();
-    socket.emit('chat message', input.value, username);
+    socket.emit('chat message', input.value, username, new Date());
     input.value = "";
     return false;
   };
