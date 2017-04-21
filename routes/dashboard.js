@@ -1,6 +1,3 @@
-/* EXPORT ROUTER
------------------------------------------ */
-module.exports = function(io) {
 
   /* LOAD ALL DEPENDENCIES
   ----------------------------------------- */
@@ -8,51 +5,57 @@ module.exports = function(io) {
   const router = express.Router();
   const passwordHash = require('password-hash');
 
-  io.on("connection", function(socket) {
-    console.log('connection made');
-    socket.on('chat message', function(message, user, timestamp) {
-      saveToDatabase(message, user, timestamp)
-      io.emit('chat message', message, user);
-    });
-  });
-
   /* ACCOUNT ROUTE
   ----------------------------------------- */
   router.get('/', checkForSession, function(req, res) {
-    const chatCollection = db.collection('chat');
-    chatCollection.find().toArray(function(err, results) {
-      res.locals.chat = results;
-      res.locals.data = req.session.data;
-      res.render('dashboard/chat');
-      })
+    res.locals.data = req.session.data;
+    res.render('dashboard/index')
+  });
+
+  router.get('/twitter', function(req, res) {
+    res.render('dashboard/twitter')
+  });
+
+  router.get('/settings', checkForSession, function(req, res) {
+    res.locals.data = req.session.data;
+    res.render('dashboard/settings');
+  });
+
+  router.post('/settings', checkForSession, function(req, res) {
+    const collection = db.collection('users');
+    const username = req.body.username;
+    const mail = req.body.mail;
+    const hometown = req.body.hometown;
+    collection.findOne({
+      username: req.session.data.username
+    }, function(err, user) {
+      if (user) {
+        collection.updateOne(user, {
+          $set: {
+            username: username,
+            mail: mail,
+            homeTown: hometown
+          }
+        }, (error, result) => {
+          if (err)
+            return console.log(err)
+          req.session.data.username = username;
+          req.session.data.mail = mail;
+          req.session.data.homeTown = hometown;
+          res.redirect('/dashboard')
+        })
+      } else {
+        res.redirect('/dashboard');
+      }
+    });
   });
 
   function checkForSession(req, res, next) {
-    if(req.session.login) {
+    if (req.session.login) {
       next();
     } else {
       res.redirect('/account');
     }
   }
 
-  function saveToDatabase(message, user, timestamp) {
-    console.log(message, user, timestamp);
-    const chatCollection = db.collection('chat');
-    const userCollection = db.collection('users');
-    const saveData = {username: user, message: message, timestamp: timestamp}
-    userCollection.findOne({
-        username: user
-      }, function(err, user) {
-        if (user) {
-          chatCollection.save(saveData, (err, result) => {
-            if (err) return console.log(err);
-          });
-        } else {
-          console.log('error');
-        }
-      });
-  }
-
-  return router;
-
-}
+module.exports = router;

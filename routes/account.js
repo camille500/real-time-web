@@ -15,6 +15,7 @@ router.get('/', function(req, res) {
 });
 
 router.get('/login', function(req, res) {
+  res.locals.message = '';
   res.render('account/login');
 });
 
@@ -28,18 +29,22 @@ router.post('/login', function(req, res) {
     if (user) {
       const pwCheck = passwordHash.verify(loginPassword, user['password']);
       if (pwCheck === true) {
+        collection.updateOne(user, {$set: {login: true}}, (error, result) => {
+          if (err) return console.log(err)
+        })
         req.session.login = true;
         req.session.data = user;
         res.redirect('/dashboard/');
       }
     } else {
-      res.redirect('/account/')
+      res.locals.message = 'De inloggegevens zijn onjuist';
+      res.render('account/login')
     }
   });
 });
 
 router.get('/register', function(req, res) {
-  res.locals.message = "Vul alle gegevens in";
+  res.locals.message = "";
   res.render('account/register');
 });
 
@@ -71,6 +76,14 @@ router.post('/register', function(req, res) {
 });
 
 router.get('/logout', function(req, res) {
+  const collection = db.collection('users');
+  collection.findOne({
+    username: req.session.data.username
+  }, function(err, user) {
+    collection.updateOne(user, {$set: {login: false}}, (error, result) => {
+      if (err) return console.log(err)
+    })
+  })
   req.session.destroy(function() {
     res.redirect('/');
   });

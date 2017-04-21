@@ -1,25 +1,22 @@
 <%- include('../partials/head.ejs') %>
 
-  <h1>Register</h1>
+<section class="logreg_header">
+  <div>
+    <h1>Registreren</h1>
+    <span>Vul alle velden in om te registreren</span>
+    <p class="error"><%= message %></p>
+  </div>
+</section>
 
-  <p><%= message %></p>
-
+<section class="logreg_form">
   <form method="post">
-    <fieldset>
-      <label for="req_username">Username</label>
-      <input type="text" name="username" id="req_username" placeholder="Kies een username" required />
-
-      <label for="req_mail">E-mailadres</label>
-      <input type="email" name="mail" id="req_mail" placeholder="Voer je e-mailadres in" required />
-
-      <label for="req_hometown">Woonplaats</label>
-      <input type="text" name="hometown" id="req_hometown" placeholder="Voer je woonplaats in" required />
-
-      <label for="req_password">Wachtwoord</label>
-      <input type="password" name="password" id="req_password" placeholder="Voer een wachtwoord in" required />
-
-      <input type="submit" value="Registreer"/>
-    </fieldset>
+    <input type="text" name="username" placeholder="Kies een gebruikersnaam" />
+    <input type="email" name="mail" placeholder="E-mailadres" />
+    <input type="text" name="hometown" placeholder="Woonplaats" />
+    <input type="password" name="password" placeholder="Kies een wachtwoord" />
+    <input type="submit" value="Registreren">
+    <p>Heb je al een account? <a href="/account/login">Log hier in!</a></p>
   </form>
+</section>
 
-<%- include('../partials/head.ejs') %>
+  <%- include('../partials/head.ejs') %>

@@ -1,34 +1,139 @@
+/* Generic
+---------------------------------------- */
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Open Sans';
+  background: url(/images/bg.png) center center;
+  padding: 1em;
+}
+
+h1 {
+  margin: 0;
+  font-size: 2.5em;
+  color: rgb(47, 47, 47);
+}
+
+li {
+  list-style: none;
 }
 
 ul {
-  list-style: none;
-  max-width: 90%;
+  padding: 0;
+  margin: 0;
 }
 
-li {
-  padding: .75em;
+/* Main
+---------------------------------------- */
+main {
+  padding: 1em;
+  background-color: rgba(255, 255, 255, 0.75);
 }
 
-li {
-  background-color: #f5f5f5;
+/* Login section
+---------------------------------------- */
+.logreg_header {
+  position: relative;
+  margin: 0 auto;
+  max-width: 19.5em;
 }
 
-li span {
-  color: green;
+.logreg_header div {
+  margin: 1.6em auto;
+  text-align: center;
+}
+
+.logreg_header h1 {
+  padding: 0;
+  margin: .5em 0 .5em 0;
+}
+
+.logreg_header span {
+  font-size: 1em;
+  color: rgb(108, 107, 107);
+}
+
+.logreg_form {
+  position: relative;
+  max-width: 22.5em;
+  padding: 2em;
+  margin: 0 auto 7em auto;
+  background-color: rgb(44, 62, 80);
+  text-align: center;
+}
+
+.logreg_form input, .settings_form input {
+  outline: none;
+  width: 100%;
+  padding: 1em;
+  margin: 0 0 1em;
+  border: none;
+  font-size: 1em;
+  box-sizing: border-box;
+}
+
+.settings_form input {
+  display: block;
+  background-color: rgb(232, 232, 232);
+  max-width: 20em;
+}
+
+.settings_form input[type="submit"] {
+  background-color: rgb(52, 152, 219);
+  color: rgb(255, 255, 255);
+}
+
+.logreg_form input[type="submit"] {
+  background-color: rgb(52, 152, 219);
+  width: 100%;
+  padding: 1em;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+}
+
+.logreg_form input[type="submit"]:hover {
+  background-color: rgb(64, 145, 199);
+}
+
+.logreg_form p {
+  margin-top: 1em;
+  color: rgb(240, 240, 240);
+}
+
+.logreg_form p a {
+  color: rgb(71, 173, 241);
+  text-decoration: none;
+}
+
+.logreg_form .register-form {
+  display: none;
+}
+
+.error {
+  color: rgb(213, 43, 43);
+  font-size: 1em;
   font-weight: 700;
-  margin-right: .5em;
 }
 
-li.your {
-  text-align: right;
+/* Twitter
+---------------------------------------- */
+main.twitter {
+  text-align: center;
+}
+
+ul.allTweets {
+    max-width: 40em;
+    height: 20em;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    overflow: auto;
+    background-color: #de4949;
+    padding: 3em;
+    padding-top: 1em;
+}
+
+ul.allTweets li {
+  list-style: none;
+  margin-bottom: 1.2em;
+  padding: .5em;
   background-color: white;
-}
-
-li.your span {
-  font-weight: 300;
-  float: right;
-  margin-left: .5em;
-  color: rgb(191, 191, 191);
 }
