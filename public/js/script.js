@@ -8,26 +8,31 @@
   var tweetCounter = document.getElementsByClassName('tweetCounter')[0];
   var minuteCount = document.getElementById('minutes');
   var secondCount = document.getElementById('seconds');
+  var averageCount = document.getElementById('average');
 
-  setInterval(function() {
-     seconds ++;
-     secondCount.innerHTML = seconds;
-     if(seconds > 60) {
-       minutes ++;
-       seconds = 0;
-       minuteCount.innerHTML = minutes;
+  if(allTweets) {
+
+    setInterval(function() {
+       seconds ++;
        secondCount.innerHTML = seconds;
-       console.log(tweetCount / minutes)
-     }
-   }, 1000);
+       if(seconds > 60) {
+         minutes ++;
+         seconds = 0;
+         minuteCount.innerHTML = minutes;
+         secondCount.innerHTML = seconds;
+         averageCount.innerHTML = 'De afgelopen minuut kwamen er gemiddeld ' + tweetCount / minutes + ' tweets binnen';
+       }
+     }, 1000);
 
-  socket.on('new tweet', function(data) {
-    tweetCount ++;
-    var newTweet = document.createElement('li');
-    var tweetText = document.createTextNode(data.text)
-    newTweet.appendChild(tweetText);
-    allTweets.insertBefore(newTweet, allTweets.childNodes[0])
-    tweetCounter.innerHTML = tweetCount;
-  });
+    socket.on('new tweet', function(data) {
+      tweetCount ++;
+      var newTweet = document.createElement('li');
+      var tweetText = document.createTextNode(data.text)
+      newTweet.appendChild(tweetText);
+      allTweets.insertBefore(newTweet, allTweets.childNodes[0])
+      tweetCounter.innerHTML = tweetCount;
+    });
+
+  }
 
 }());
