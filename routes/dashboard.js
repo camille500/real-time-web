@@ -12,7 +12,7 @@
     res.render('dashboard/index')
   });
 
-  router.get('/twitter', function(req, res) {
+  router.get('/twitter', checkForSession, function(req, res) {
     res.render('dashboard/twitter')
   });
 
