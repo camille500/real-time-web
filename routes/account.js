@@ -15,8 +15,12 @@ router.get('/', function(req, res) {
 });
 
 router.get('/login', function(req, res) {
-  res.locals.message = '';
-  res.render('account/login');
+  if(req.session.login) {
+    res.redirect('/dashboard')
+  } else {
+    res.locals.message = '';
+    res.render('account/login');
+  }
 });
 
 router.post('/login', function(req, res) {
@@ -44,8 +48,12 @@ router.post('/login', function(req, res) {
 });
 
 router.get('/register', function(req, res) {
-  res.locals.message = "";
-  res.render('account/register');
+  if(req.session.login) {
+    res.redirect('/dashboard')
+  } else {
+    res.locals.message = "";
+    res.render('account/register');
+  }
 });
 
 router.post('/register', function(req, res) {

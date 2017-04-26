@@ -5,7 +5,11 @@
   <h1>Dashboard</h1>
   <p>Het dashboard is nog in onderhoud</p>
 
-  <p>Hi <%= data.username %></p>
+  <% if(data.username) { %>
+    <p>Hi <%= data.username %></p>
+  <% } else { %>
+    <p>Hi <%= data.screen_name %></p>
+  <% } %>
 
   <ul>
     <li><a href="/dashboard/twitter">Twitter Stream</a></li>

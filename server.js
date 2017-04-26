@@ -16,7 +16,7 @@ const io = require('socket.io')(http);
 
 /* MONGODB CONFIGURATION
 ----------------------------------------- */
-const MongoClient = require("mongodb").MongoClient;
+const MongoClient = require('mongodb').MongoClient;
 require('dotenv').config();
 const dbConfig = process.env.MONGODB_URI;
 
@@ -28,7 +28,11 @@ MongoClient.connect(dbConfig, (err, database) => {
 
 /* SESSIONS CONFIGURATION
 ----------------------------------------- */
-app.use(session({secret: "JA1d82JHYF9?nsdfDF635MuHe#ksd", resave: false, saveUninitialized: true}));
+app.use(session({
+  secret: 'JA1d82JHYF9?nsdfDF635MuHe#ksd',
+  resave: false,
+  saveUninitialized: true
+}));
 
 /* SET PORT FOR HEROKU
 ----------------------------------------- */
@@ -44,6 +48,7 @@ app.use(compression());
 const indexRouter = require('./routes/index');
 const accountRouter = require('./routes/account');
 const dashboardRouter = require('./routes/dashboard');
+const oAuthRouter = require('./routes/oAuth');
 //(io)
 
 /* MIDDLEWARE FOR THE VIEW ENGINE
@@ -62,6 +67,7 @@ app.use(express.static('public')); // For server static files
 app.use('/', indexRouter);
 app.use('/account', accountRouter);
 app.use('/dashboard', dashboardRouter);
+app.use('/twitter', oAuthRouter);
 
 /* TWITTER DATA
 ----------------------------------------- */
@@ -84,7 +90,7 @@ TwitterClient.stream('statuses/filter', {
   });
 });
 
-io.on("connection", function(socket) {
+io.on('connection', function(socket) {
   console.log('connection made');
 });
 

@@ -137,3 +137,12 @@ ul.allTweets li {
   padding: .5em;
   background-color: white;
 }
+
+.twitterLogin {
+  padding: .75em 1em;
+  text-decoration: none;
+  background-color: #5AADEB;
+  color: white;
+  margin-top: 2em;
+  display: block;
+}
