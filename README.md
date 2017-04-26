@@ -14,7 +14,7 @@ In the same folder, type ``$ npm install`` to install all dependencies. The appl
 
 ## Short description
 
-I've build a application that shows the last Tweets with 'Amsterdam' in it. User can create an account that will be stored in a MongoDB collection. After logging in, the user can go to the 'Twitter Dashboard'. On the dashboard is a stream that shows all new Tweets since the page was opened. There is also a counter that counts the amount of new Tweets. 
+I've build a application that shows the last Tweets with 'Amsterdam' in it. User can create an account that will be stored in a MongoDB collection. After logging in, the user can go to the 'Twitter Dashboard'. On the dashboard is a stream that shows all new Tweets since the page was opened. There is also a counter that counts the amount of new Tweets.
 
 ### Features
 
@@ -27,10 +27,10 @@ I've build a application that shows the last Tweets with 'Amsterdam' in it. User
 
 ### Wishlist
 
-* oAuth to login, so that the user can get more data from it's own profile
-* The possibility to choose an own keyword to stream on
-* D3 Data visualisations
-* Showing more data that comes with the tweets
-* Showing a push notification if a desired tweet comes up
-* More interesting data for the dashboard
-* Better overall design and UX
+- [x] oAuth to login, so that the user can get more data from it's own profile
+- [ ] The possibility to choose an own keyword to stream on
+- [ ] D3 Data visualisations
+- [ ] Showing more data that comes with the tweets
+- [ ] Showing a push notification if a desired tweet comes up
+- [ ] More interesting data for the dashboard
+- [ ] Better overall design and UX
