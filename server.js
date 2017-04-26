@@ -71,10 +71,10 @@ app.use('/twitter', oAuthRouter);
 
 /* TWITTER DATA
 ----------------------------------------- */
-const consumerKey = process.env.CONSUMERKEY;
-const consumerSecret = process.env.CONSUMERSECRET;
-const accessToken = process.env.ACCESSTOKEN;
-const tokenSecret = process.env.ACCESSTOKENSECRET;
+const consumerKey = process.env.STREAMCONSUMERKEY;
+const consumerSecret = process.env.STREAMCONSUMERSECRET;
+const accessToken = process.env.STREAMACCESSTOKEN;
+const tokenSecret = process.env.STREAMACCESSTOKENSECRET;
 
 const TwitterClient = new Twitter({consumer_key: consumerKey, consumer_secret: consumerSecret, access_token_key: accessToken, access_token_secret: tokenSecret});
 
@@ -86,7 +86,7 @@ TwitterClient.stream('statuses/filter', {
     io.emit('new tweet', newTweet);
   });
   stream.on('error', function(err) {
-    console.log(err);
+    console.log(`Error: ${err}`);
   });
 });
 
