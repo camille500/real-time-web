@@ -29,7 +29,7 @@ MongoClient.connect(dbConfig, (err, database) => {
 /* SESSIONS CONFIGURATION
 ----------------------------------------- */
 app.use(session({
-  secret: 'JA1d82JHYF9?nsdfDF635MuHe#ksd',
+  secret: process.env.SESSIONSECRET,
   resave: false,
   saveUninitialized: true
 }));
