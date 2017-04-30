@@ -6,6 +6,8 @@
   var minutes = 0;
   var allTweets = document.getElementsByClassName('allTweets')[0];
   var tweetCounter = document.getElementsByClassName('tweetCounter')[0];
+  var minuteOrMinutes = document.getElementById('minuteOrMinutes');
+  var secondOrSeconds = document.getElementById('secondOrSeconds');
   var minuteCount = document.getElementById('minutes');
   var secondCount = document.getElementById('seconds');
   var averageCount = document.getElementById('average');
@@ -15,7 +17,17 @@
     setInterval(function() {
        seconds ++;
        secondCount.innerHTML = seconds;
-       if(seconds > 60) {
+       if(minutes === 1) {
+         minuteOrMinutes.innerHTML = 'minuut';
+       } else {
+         minuteOrMinutes.innerHTML = 'minuten';
+       }
+       if(seconds === 1) {
+         secondOrSeconds.innerHTML = 'seconde';
+       } else {
+         secondOrSeconds.innerHTML = 'seconden';
+       }
+       if(seconds > 59) {
          minutes ++;
          seconds = 0;
          minuteCount.innerHTML = minutes;
