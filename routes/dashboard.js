@@ -13,6 +13,7 @@
   });
 
   router.get('/twitter', checkForSession, function(req, res) {
+    console.log(req.session)
     res.render('dashboard/twitter')
   });
 
