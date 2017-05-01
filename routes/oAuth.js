@@ -1,7 +1,3 @@
-/* SOURCES
- - https://gist.github.com/JuanJo4/e408d9349b403523aeb00f262900e768
-*/
-
 /* LOAD ALL DEPENDENCIES
 ----------------------------------------- */
 const express = require('express');
@@ -21,13 +17,14 @@ const consumer = new oauth.OAuth(
   consumerKey,
   consumerSecret,
   '1.0A',
-  'https://real-time-web-cmd.herokuapp.com/twitter/callback',
+  'http://localhost:3000/twitter/callback',
   'HMAC-SHA1'
 );
 
 /* ROUTES
 ----------------------------------------- */
 router.get('/', function(req, res) {
+  const userCollection = db.collection('users');
   const config = {
     url: 'https://api.twitter.com/1.1/account/verify_credentials.json',
     token: req.session.oauthAccessToken,
@@ -35,14 +32,22 @@ router.get('/', function(req, res) {
     secret: req.session.oauthAccessSecret
   }
   consumer.get(config.url, config.token, config.secret, function (error, data, response) {
-    if (error) {
+    if(error) {
       res.redirect('/twitter/login');
     } else {
       const cleanData = JSON.parse(data);
-      req.session.data = cleanData;
       req.session.login = true;
-      console.log(cleanData)
-      res.redirect('/dashboard');
+      req.session.data = cleanData;
+      userCollection.findOne({
+          username: cleanData.screen_name
+      }, function(err, user) {
+        if(user) {
+         req.session.user = user;
+         res.redirect('/dashboard');
+       } else {
+         res.redirect('/account/setup')
+       }
+     });
     }
   });
 });

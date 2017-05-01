@@ -6,78 +6,46 @@ const passwordHash = require('password-hash');
 
 /* INDEX ROUTE
 ----------------------------------------- */
-router.get('/', function(req, res) {
-  if (req.session.login) {
-    res.redirect('/dashboard')
-  } else {
-    res.redirect('/account/login');
-  }
+router.get('/', checkForSession, function(req, res) {
+  res.redirect('/dashboard')
 });
 
 router.get('/login', function(req, res) {
-  if(req.session.login) {
-    res.redirect('/dashboard')
-  } else {
-    res.locals.message = '';
-    res.render('account/login');
-  }
+  res.render('account/login');
 });
 
-router.post('/login', function(req, res) {
-  const collection = db.collection('users');
-  const loginName = req.body.username;
-  const loginPassword = req.body.password;
-  collection.findOne({
-    username: loginName
-  }, function(err, user) {
-    if (user) {
-      const pwCheck = passwordHash.verify(loginPassword, user['password']);
-      if (pwCheck === true) {
-        collection.updateOne(user, {$set: {login: true}}, (error, result) => {
-          if (err) return console.log(err)
-        })
-        req.session.login = true;
-        req.session.data = user;
-        res.redirect('/dashboard/');
-      }
-    } else {
-      res.locals.message = 'De inloggegevens zijn onjuist';
-      res.render('account/login')
-    }
-  });
+router.get('/account', checkForSession, function(req, res) {
+  res.redirect('/dashboard')
 });
 
-router.get('/register', function(req, res) {
-  if(req.session.login) {
-    res.redirect('/dashboard')
-  } else {
-    res.locals.message = "";
-    res.render('account/register');
-  }
+router.get('/setup', checkForSession, function(req, res) {
+  console.log(req.session.data);
+  res.render('account/setup')
 });
 
-router.post('/register', function(req, res) {
-  const collection = db.collection('users');
-  const regName = req.body.username;
-  const regMail = req.body.mail;
-  const regHometown = req.body.hometown;
-  const regPassword = passwordHash.generate(req.body.password);
-  const regData = {
-    username: regName,
-    mail: regMail,
-    homeTown: regHometown,
-    password: regPassword
+router.post('/setup', function(req, res) {
+  const userCollection = db.collection('users');
+  const username = req.session.data.screen_name;
+  const fullname = req.body.fullname;
+  const hometown = req.body.hometown;
+  const email = req.body.email;
+  const setupData = {
+    username: req.session.data.screen_name,
+    fullname: fullname,
+    mail: email,
+    homeTown: hometown
   };
-  collection.findOne({
-    username: regName
+  userCollection.findOne({
+    username: req.session.data.screen_name
   }, function(err, user) {
     if (user) {
-      res.locals.message = "De gekozen gebruikersnaam bestaat al";
-      res.render('account/register');
+      req.session.user = user;
+      res.redirect('/dashboard');
     } else {
-      collection.save(regData, (err, result) => {
+      userCollection.save(setupData, (err, result) => {
         if (err) return console.log(err);
-        res.redirect('/account/login');
+        req.session.user = setupData;
+        res.redirect('/account/');
       });
     }
   });
@@ -96,6 +64,16 @@ router.get('/logout', function(req, res) {
     res.redirect('/');
   });
 });
+
+function checkForSession(req, res, next) {
+  if (req.session.login) {
+    res.locals.data = req.session.data;
+    res.locals.user = req.session.user;
+    next();
+  } else {
+    res.redirect('/account/login');
+  }
+}
 
 /* EXPORT ROUTER
 ----------------------------------------- */

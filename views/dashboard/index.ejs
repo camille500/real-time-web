@@ -2,18 +2,11 @@
 
 <main>
 
-  <h1>Dashboard</h1>
-  <p>Het dashboard is nog in onderhoud</p>
-
-  <% if(data.username) { %>
-    <p>Hi <%= data.username %></p>
-  <% } else { %>
-    <p>Hi <%= data.screen_name %></p>
-  <% } %>
+  <h1>Dashboard van <%= user.username %></h1>
+  <p>Je kunt hier jouw instellingen voor het Twitter Dashboard aanpassen.</p>
 
   <ul>
-    <li><a href="/dashboard/twitter">Twitter Stream</a></li>
-    <li><a href="/dashboard/settings">Settings</a></li>
+    <li><a href="/dashboard/twitter">Twitter Dashboard</a></li>
     <li><a href="/account/logout">Uitloggen</a></li>
   </ul>
 
