@@ -6,7 +6,6 @@ const request = require('request');
 const session = require('express-session');
 const compression = require('compression');
 const bodyParser = require('body-parser');
-const Twitter = require('twitter');
 
 /* DEPENDENCIES CONFIGURATION
 ----------------------------------------- */
@@ -47,7 +46,7 @@ app.use(compression());
 ----------------------------------------- */
 const indexRouter = require('./routes/index');
 const accountRouter = require('./routes/account');
-const dashboardRouter = require('./routes/dashboard');
+const dashboardRouter = require('./routes/dashboard')(io);
 const oAuthRouter = require('./routes/oAuth');
 //(io)
 
@@ -68,31 +67,6 @@ app.use('/', indexRouter);
 app.use('/account', accountRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/twitter', oAuthRouter);
-
-/* TWITTER DATA
------------------------------------------ */
-const consumerKey = process.env.STREAMCONSUMERKEY;
-const consumerSecret = process.env.STREAMCONSUMERSECRET;
-const accessToken = process.env.STREAMACCESSTOKEN;
-const tokenSecret = process.env.STREAMACCESSTOKENSECRET;
-
-const TwitterClient = new Twitter({consumer_key: consumerKey, consumer_secret: consumerSecret, access_token_key: accessToken, access_token_secret: tokenSecret});
-
-const filter = 'Amsterdam';
-TwitterClient.stream('statuses/filter', {
-  track: filter
-}, function(stream) {
-  stream.on('data', function(newTweet) {
-    io.emit('new tweet', newTweet);
-  });
-  stream.on('error', function(err) {
-    console.log(`Error: ${err}`);
-  });
-});
-
-io.on('connection', function(socket) {
-  console.log('connection made');
-});
 
 /* 404 PAGE
 ----------------------------------------- */

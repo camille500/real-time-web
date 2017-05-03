@@ -3,7 +3,16 @@
 <main>
 
   <h1>Dashboard van <%= user.username %></h1>
-  <p>Je kunt hier jouw instellingen voor het Twitter Dashboard aanpassen.</p>
+  <p>Stel hier 5 keywords in waar je op wilt filteren in je Twitter Dashboard</p>
+
+  <form class="filterForm" method="post">
+    <input type="text" name="filter1" placeholder="filter1" value="<%= user.filter1 %>" />
+    <input type="text" name="filter2" placeholder="filter2" value="<%= user.filter2 %>" />
+    <input type="text" name="filter3" placeholder="filter3" value="<%= user.filter3 %>" />
+    <input type="text" name="filter4" placeholder="filter4" value="<%= user.filter4 %>" />
+    <input type="text" name="filter5" placeholder="filter5" value="<%= user.filter5 %>" />
+    <input type="submit" value="Verstuur" />
+  </form>
 
   <ul>
     <li><a href="/dashboard/twitter">Twitter Dashboard</a></li>

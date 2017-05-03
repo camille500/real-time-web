@@ -156,3 +156,23 @@ ul.allTweets li {
 .maxBtnWidth {
   max-width: 10em;
 }
+
+/* D3
+---------------------------------------- */
+.bar {
+  fill: rgb(205, 61, 56);
+}
+
+.bar:hover {
+  fill: rgb(50, 55, 99);
+}
+
+.axis {
+  font-size: 1em;
+}
+
+.axis path,
+.axis line {
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
