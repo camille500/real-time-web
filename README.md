@@ -28,8 +28,8 @@ I've build a application that shows the last Tweets with 'Amsterdam' in it. User
 ### Wishlist
 
 - [x] oAuth to login, so that the user can get more data from it's own profile
-- [ ] The possibility to choose an own keyword to stream on
-- [ ] D3 Data visualisations
+- [x] The possibility to choose an own keyword to stream on
+- [x] D3 Data visualisations
 - [ ] Showing more data that comes with the tweets
 - [ ] Showing a push notification if a desired tweet comes up
 - [ ] More interesting data for the dashboard

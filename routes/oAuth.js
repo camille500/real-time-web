@@ -17,7 +17,7 @@ const consumer = new oauth.OAuth(
   consumerKey,
   consumerSecret,
   '1.0A',
-  'https://real-time-web-cmd.herokuapp.com/twitter/callback',
+  'http://localhost:3000/twitter/callback',
   'HMAC-SHA1'
 );
 
